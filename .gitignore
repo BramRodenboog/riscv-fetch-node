@@ -1,0 +1,10 @@
+# Binaries (Linux)
+riscv-fetch-node
+*.out
+
+# Go modules
+go.sum
+go.mod
+
+
+
