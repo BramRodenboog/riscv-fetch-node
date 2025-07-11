@@ -33,7 +33,7 @@ func main() {
 			log.Printf("Warning: only %d bytes sent (expected 4)", result)
 		}
 
-		log.Println("Send instruction 0x%08x (%d btyes)\n: ", instruction, result)
+		log.Printf("Send instruction 0x%08x (%d bytes):\n", instruction, result)
 
 	}
 
