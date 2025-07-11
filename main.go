@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/binary"
+	"fmt"
 	"log"
 	"net"
 )
@@ -13,21 +14,27 @@ func main() {
 	}
 	defer conn.Close()
 
-	var instruction uint32 = 0x00510113
-
-	buf := make([]byte, 4)
-
-	binary.LittleEndian.PutUint32(buf, instruction)
-
-	result, err := conn.Write(buf)
-
-	if err != nil {
-		log.Println(err)
-	}
-	if result != 4 {
-		log.Printf("Warning: only %d bytes sent (expected 4)", result)
+	instructions := []uint32{
+		0x00510113,
+		0x00100093,
+		0x00208133,
 	}
 
-	log.Println("Send instruction 0x%08x (%d btyes)\n: ", instruction, result)
+	for _, instruction := range instructions {
+
+		buf := binary.LittleEndian.AppendUint32(nil, instruction)
+		fmt.Println(buf)
+		result, err := conn.Write(buf)
+
+		if err != nil {
+			log.Println(err)
+		}
+		if result != 4 {
+			log.Printf("Warning: only %d bytes sent (expected 4)", result)
+		}
+
+		log.Println("Send instruction 0x%08x (%d btyes)\n: ", instruction, result)
+
+	}
 
 }
