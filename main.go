@@ -17,7 +17,7 @@ func main() {
 	instructions := []uint32{
 		0x00510113,
 		0x00100093,
-		0x00208133,
+		0x00510113,
 	}
 
 	for _, instruction := range instructions {
